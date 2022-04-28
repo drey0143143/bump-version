@@ -2,8 +2,11 @@ name: Changelog & Releases
 on:
  push:
      branches:
-          - main
-
+         - main
+     paths-ignore:
+       - 'package.json'
+       - 'CHANGELOG.md'
+          
 jobs:
   release:
     runs-on: ubuntu-latest

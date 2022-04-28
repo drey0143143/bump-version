@@ -18,8 +18,7 @@ jobs:
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
         env:
-           GITHUB_TOKEN: ${{ secrets.PAT_ACCESS }}
-           
+           GITHUB_TOKEN: ${{ secrets.PAT_ACCESS }} 
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}

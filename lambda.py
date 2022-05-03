@@ -1,4 +1,4 @@
-from datetime import dateime,timezone
+from datetime import datetime,timezone
 
 import boto3
 from botocore.exceptions import ClientError
@@ -6,7 +6,7 @@ from botocore.exceptions import ClientError
 AWS_EMAIL_REGION = 'us-east-1'
 EMAIL_FROM ='darekorex143@gmail.com'
 EMAIL_TO = 'darekorex143@gmail.com'
-MAX_AGE = 60
+MAX_AGE = 90
 
 iam = boto3.client('iam')
 ses = boto3.client('ses', region_name=AWS_EMAIL_REGION)
@@ -33,14 +33,14 @@ def lambda_handler(event,context):
                 
                 # Expire the key
                 print(f'Key {access_key_id} for user {username} is expired '
-                      f(age={age} days).')
+                      f'(age={age} days).')
                       
                 iam.update_access_key(
                     UserName=username,
                     AccessKeyId=access_key_id,
                     Status='Inactive')
                     
-                send_email_report(EMAIL_TO, username, age. access_key_id)
+                send_email_report(EMAIL_TO, username, age, access_key_id)
                 
                 
 def days_old(create_date):
@@ -51,27 +51,28 @@ def days_old(create_date):
     
 def send_email_report(email_to, username, age, access_key_id):
     
-    data = (f'Access Key {access_key_id} belonging to user {username} has been
+    data = (f'Access Key {access_key_id} belonging to user {username} has been '
             f'automatically deactivated due to it being {age} days old.')
             
     try:
-        response = ses.send_email(
-            Source=EMAIL_FROM,
-            Destination={
-                'ToAddresses': [EMAIL_TO]
-            },
-            Message={
-                'Subject':{
-                    'Data: ('AWS IAM Access Key Rotation - Deactivation of '
-                            f'Access Keys: {access_key_id} ')
-                },
-                'Body': {
-                    'Text':{
-                        'Data'
-                    }
-                }
-            })
+       response = ses.send_email(
+           Source=EMAIL_FROM,
+           Destination={
+               'ToAddresses':[EMAIL_TO]
+           },
+           Message={
+               'Subject':{
+                   'Data': (f'AWS IAM Access Key Rotation - Deactivation of '
+                            f'Access Keys: {access_key_id}.')
+               },
+               'Body':{
+                   'Text': {
+                       'Data': data
+                   }
+               }
+           }
+        )
     except ClientError as e:
-        print(e.response['Error'] ['Message'])
-        else:
-            print("Email sent! Message ID:" + response['MessageId'])
+        print(e.response['Error']['Message'])
+    else:
+        print("Email sent! Message ID:" + response['MessageId'])

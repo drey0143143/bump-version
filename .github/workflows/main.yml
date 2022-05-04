@@ -6,6 +6,10 @@ on:
 jobs:
   bump-tag:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      
+    
     steps:
       - uses: actions/checkout@v2
         with:

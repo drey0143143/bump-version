@@ -24,7 +24,7 @@ jobs:
         with:
           github_token: ${{ secrets.PAT_ACCESS_NEW }}
        
-      - name: Create release
+      - name: Create releases
         uses:  ncipollo/release-action@v1
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}

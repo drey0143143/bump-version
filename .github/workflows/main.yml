@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
+      issues: write
+      packages: write
+      repository-projects: read | write
       
     
     steps:
@@ -22,7 +25,7 @@ jobs:
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.0
         with:
-          github_token: ${{ secrets.PAT_ACCESS_NEW }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
        
       - name: Create releases
         uses:  ncipollo/release-action@v1

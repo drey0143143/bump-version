@@ -10,7 +10,7 @@ jobs:
       id-token: write
       issues: write
       packages: write
-      repository-projects: read | write
+      repository-projects: read
       
     
     steps:

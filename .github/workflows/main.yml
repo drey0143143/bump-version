@@ -30,6 +30,8 @@ jobs:
        
       - name: Create releases
         uses:  ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_ACCESS_NEW }}
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}

@@ -21,7 +21,6 @@ jobs:
              # This is needed to retrieve all commits history in a single branch with 200 being the maximum fetch-depth
              # using fetch-depth "0" gets all commit history for all branches and tags in the repository which we didn't need and felt was an expensive operation
              fetch-depth: "200"
-             persist-credentials: false
              
       - name: Bump version and push tag
         id: tag_version

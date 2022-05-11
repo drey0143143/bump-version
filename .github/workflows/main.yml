@@ -1,15 +1,14 @@
-name: Bump version
+name:  Release using conventional commits (master branch)
 on:
   push:
     branches:
       - main
 jobs:
-  bump-tag:
+  release-tag:
     runs-on: ubuntu-latest
     permissions:
       contents: write   # write permissions is needed in order to create release in the master branch
       
-    
     steps:
       - uses: actions/checkout@v2
         with:

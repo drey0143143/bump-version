@@ -1,4 +1,4 @@
-name:  Release using conventional commits (master branch)
+name:  Release using conventional commits
 on:
   push:
     branches:

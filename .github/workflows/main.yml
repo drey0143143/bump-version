@@ -7,7 +7,7 @@ jobs:
   bump-tag:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write   # write permissions is needed in order to create release in the master branch
       
     
     steps:
